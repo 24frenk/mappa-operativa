@@ -7,34 +7,42 @@
 </head>
 <body>
 
+<!-- BARRA DI STATO -->
 <div id="status-bar">
     Ultimo aggiornamento: <span id="last-update">--</span> |
     Stato: <span id="online-status">--</span>
 </div>
 
+<!-- LAYOUT PRINCIPALE -->
 <div id="main-layout">
+
+    <!-- SIDEBAR -->
     <div id="sidebar">
         <div id="sidebar-title">Unità</div>
         <div id="sidebar-content"></div>
     </div>
 
+    <!-- MAPPA -->
     <div id="map-wrapper">
         <div id="map-container">
             <img id="map-image" src="mappa.jpg">
-            <div id="boxes-container"></div>
+            <!-- Le box vengono inserite qui da viewer.js -->
         </div>
     </div>
+
 </div>
 
 <!-- POPUP -->
 <div id="popup" class="popup hidden">
     <div id="popup-header">
         <span id="popup-title"></span>
-        <button id="popup-close">Chiudi</button>
+        <button id="popup-close" onclick="closePopup()">Chiudi</button>
     </div>
     <div id="popup-content"></div>
 </div>
 
+<!-- SCRIPT VIEWER -->
 <script src="viewer.js"></script>
+
 </body>
 </html>
