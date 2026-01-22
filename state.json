@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T18:05:36.074Z",
+  "timestamp": "2026-01-22T18:07:06.055Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
@@ -14,8 +14,8 @@
         "supporti": "",
         "note": "zaino a + dae",
         "membri": "[{\"nome\":\"pinco pallo\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"123456789\"}]",
-        "x": "200px",
-        "y": "200px",
+        "x": "472px",
+        "y": "471px",
         "radio": "1",
         "sanMed": "false",
         "sanInf": "true",
