@@ -1,8 +1,28 @@
 {
-  "timestamp": "2026-01-22T21:30:40.519Z",
+  "timestamp": "2026-01-22T21:30:42.215Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
-    "boxes": []
+    "boxes": [
+      {
+        "id": "box_gvj1zo5ge",
+        "type": "postazione",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "ambulanze": "[]",
+        "squadre": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      }
+    ]
   }
 }
