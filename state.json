@@ -1,45 +1,79 @@
 {
-    "state": {
-        "status": "Operativo",
-        "mapImage": "mappa.jpg",
-
-        "boxes": [
-            {
-                "id": 1,
-                "name": "PMA 1",
-                "type": "pma",
-                "status": "Attivo",
-                "color": "green",
-                "x": 200,
-                "y": 150,
-                "width": 120,
-                "height": 60,
-                "timestamp": "2026-01-22 23:00"
-            },
-            {
-                "id": 2,
-                "name": "Ambulanza 12",
-                "type": "ambulanza",
-                "status": "Disponibile",
-                "color": "yellow",
-                "x": 400,
-                "y": 300,
-                "width": 120,
-                "height": 60,
-                "timestamp": "2026-01-22 23:05"
-            },
-            {
-                "id": 3,
-                "name": "Squadra Alfa",
-                "type": "squadra",
-                "status": "In movimento",
-                "color": "red",
-                "x": 600,
-                "y": 200,
-                "width": 120,
-                "height": 60,
-                "timestamp": "2026-01-22 23:10"
-            }
-        ]
-    }
+  "timestamp": "2026-01-22T22:36:09.677Z",
+  "state": {
+    "scale": 0.44,
+    "mapLocked": false,
+    "boxes": [
+      {
+        "id": "box_gvj1zo5ge",
+        "type": "postazione",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "ambulanze": "[]",
+        "squadre": "[]",
+        "x": "105px",
+        "y": "528px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_48slewyoe",
+        "type": "squadra",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "578px",
+        "y": "635px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_ejad3iwwp",
+        "type": "ambulanza",
+        "name": "738",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "zaino 2",
+        "membri": "[{\"nome\":\"andre arrigoni\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"3333333333\"}]",
+        "x": "458px",
+        "y": "541px",
+        "radio": "3",
+        "sanMed": "true",
+        "sanInf": "false",
+        "sanNome": "arrigoni"
+      },
+      {
+        "id": "box_yeyripqvw",
+        "type": "pma",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "245px",
+        "y": "355px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      }
+    ]
+  }
 }
