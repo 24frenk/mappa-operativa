@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T21:41:50.685Z",
+  "timestamp": "2026-01-22T21:41:52.951Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -69,23 +69,6 @@
         "membri": "[]",
         "x": "245px",
         "y": "355px",
-        "radio": "",
-        "sanMed": "false",
-        "sanInf": "false",
-        "sanNome": ""
-      },
-      {
-        "id": "box_lpdm79tdq",
-        "type": "pma",
-        "name": "",
-        "locked": "false",
-        "standby": "false",
-        "interventi": "",
-        "supporti": "",
-        "note": "",
-        "membri": "[]",
-        "x": "200px",
-        "y": "200px",
         "radio": "",
         "sanMed": "false",
         "sanInf": "false",
