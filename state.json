@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T22:19:32.992Z",
+  "timestamp": "2026-01-22T22:19:36.886Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -29,7 +29,7 @@
         "name": "",
         "locked": "false",
         "standby": "false",
-        "interventi": "",
+        "interventi": "IN CORSO",
         "supporti": "",
         "note": "",
         "membri": "[]",
