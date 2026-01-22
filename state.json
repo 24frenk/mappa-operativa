@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T22:13:04.066Z",
+  "timestamp": "2026-01-22T22:13:10.282Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -43,7 +43,7 @@
       {
         "id": "box_ejad3iwwp",
         "type": "ambulanza",
-        "name": "",
+        "name": "738",
         "locked": "false",
         "standby": "false",
         "interventi": "",
