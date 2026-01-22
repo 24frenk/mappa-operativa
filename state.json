@@ -1,24 +1,24 @@
 {
-  "timestamp": "2026-01-22T18:07:11.184Z",
+  "timestamp": "2026-01-22T18:54:36.351Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
     "boxes": [
       {
-        "id": "box_jrn6fpbbo",
-        "type": "squadra",
-        "name": "PAPA 1",
+        "id": "box_u5wxw73jy",
+        "type": "ambulanza",
+        "name": "",
         "locked": "false",
         "standby": "false",
         "interventi": "",
         "supporti": "",
-        "note": "zaino a + dae",
-        "membri": "[{\"nome\":\"pinco pallo\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"123456789\"}]",
-        "x": "688px",
-        "y": "597px",
-        "radio": "1",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
         "sanMed": "false",
-        "sanInf": "true",
+        "sanInf": "false",
         "sanNome": ""
       }
     ]
