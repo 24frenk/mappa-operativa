@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T21:30:53.209Z",
+  "timestamp": "2026-01-22T21:30:54.689Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -35,6 +35,23 @@
         "membri": "[]",
         "x": "444px",
         "y": "624px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_ejad3iwwp",
+        "type": "ambulanza",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
         "radio": "",
         "sanMed": "false",
         "sanInf": "false",
