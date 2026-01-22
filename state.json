@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T19:18:44.928Z",
+  "timestamp": "2026-01-22T19:19:09.218Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
@@ -24,19 +24,19 @@
       {
         "id": "box_z714tk9tk",
         "type": "squadra",
-        "name": "",
+        "name": "99",
         "locked": "false",
         "standby": "false",
         "interventi": "",
         "supporti": "",
-        "note": "",
-        "membri": "[]",
+        "note": "wmc",
+        "membri": "[{\"nome\":\"ANDREA ARRIGONI\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"3333333333\"}]",
         "x": "200px",
         "y": "200px",
-        "radio": "",
-        "sanMed": "false",
+        "radio": "99",
+        "sanMed": "true",
         "sanInf": "false",
-        "sanNome": ""
+        "sanNome": "ARRIGONI"
       }
     ]
   }
