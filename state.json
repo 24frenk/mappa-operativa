@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T22:18:02.221Z",
+  "timestamp": "2026-01-22T22:18:05.067Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -50,8 +50,8 @@
         "supporti": "",
         "note": "zaino 2",
         "membri": "[{\"nome\":\"andre arrigoni\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"3333333333\"}]",
-        "x": "694px",
-        "y": "503px",
+        "x": "458px",
+        "y": "541px",
         "radio": "3",
         "sanMed": "true",
         "sanInf": "false",
