@@ -1,6 +1,26 @@
 {
-  "timestamp": "1970-01-01T00:00:00",
+  "timestamp": "2026-01-22T18:05:02.563Z",
   "state": {
-    "boxes": []
+    "scale": 1,
+    "mapLocked": false,
+    "boxes": [
+      {
+        "id": "box_jrn6fpbbo",
+        "type": "squadra",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      }
+    ]
   }
 }
