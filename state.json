@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T21:30:47.527Z",
+  "timestamp": "2026-01-22T21:30:48.840Z",
   "state": {
     "scale": 0.44,
     "mapLocked": false,
@@ -18,6 +18,23 @@
         "squadre": "[]",
         "x": "105px",
         "y": "528px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_48slewyoe",
+        "type": "squadra",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
         "radio": "",
         "sanMed": "false",
         "sanInf": "false",
