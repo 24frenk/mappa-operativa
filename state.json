@@ -1,26 +1,9 @@
 {
-  "timestamp": "2026-01-22T19:19:09.218Z",
+  "timestamp": "2026-01-22T19:19:15.297Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
     "boxes": [
-      {
-        "id": "box_498ie4984",
-        "type": "squadra",
-        "name": "",
-        "locked": "false",
-        "standby": "false",
-        "interventi": "",
-        "supporti": "",
-        "note": "",
-        "membri": "[]",
-        "x": "200px",
-        "y": "200px",
-        "radio": "",
-        "sanMed": "false",
-        "sanInf": "false",
-        "sanNome": ""
-      },
       {
         "id": "box_z714tk9tk",
         "type": "squadra",
