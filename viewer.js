@@ -1,4 +1,18 @@
 /* ============================================================
+   VIEWER MODE — CARICA MAPPA DI DEFAULT
+============================================================ */
+
+window.addEventListener("DOMContentLoaded", () => {
+    const img = document.getElementById("map-image");
+
+    // Se non c’è una mappa salvata, usa quella di default
+    if (!localStorage.getItem("mapImage")) {
+        img.src = "mappa.jpg";   // <-- NOME DEL FILE ONLINE
+    }
+
+    loadState();
+});
+/* ============================================================
    VIEWER MODE — DISABILITAZIONE FUNZIONI OPERATIVE
 ============================================================ */
 
