@@ -1,28 +1,14 @@
 /* ============================================================
-   VIEWER MODE — CARICA MAPPA DI DEFAULT
-============================================================ */
-
-window.addEventListener("DOMContentLoaded", () => {
-    const img = document.getElementById("map-image");
-
-    // Se non c’è una mappa salvata, usa quella di default
-    if (!localStorage.getItem("mapImage")) {
-        img.src = "mappa.jpg";   // <-- NOME DEL FILE ONLINE
-    }
-
-    loadState();
-});
-/* ============================================================
    VIEWER MODE — DISABILITAZIONE FUNZIONI OPERATIVE
 ============================================================ */
 
-function saveState() { return; }
-function syncToGitHub() { return; }
-function toggleStandby() { return; }
-function terminaIntervento() { return; }
-function terminaSupporto() { return; }
-function savePopup() { return; }
-function removeCurrentUnit() { return; }
+function saveState() {}
+function syncToGitHub() {}
+function toggleStandby() {}
+function terminaIntervento() {}
+function terminaSupporto() {}
+function savePopup() {}
+function removeCurrentUnit() {}
 
 /* ============================================================
    VIEWER MODE — DISABILITA DRAG
@@ -31,60 +17,74 @@ function removeCurrentUnit() { return; }
 function startDrag() {
     return; // nessun trascinamento nel viewer
 }
+
 /* ============================================================
-   VIEWER MODE — DISABILITA TUTTI GLI INPUT NEI POPUP
+   VIEWER MODE — DISABILITA INPUT NEI POPUP
 ============================================================ */
 
 function disablePopupInputs() {
     const popup = document.getElementById("popup");
 
-    popup.querySelectorAll("input").forEach(el => {
+    popup.querySelectorAll("input, textarea, select").forEach(el => {
         el.disabled = true;
         el.readOnly = true;
-    });
-
-    popup.querySelectorAll("textarea").forEach(el => {
-        el.disabled = true;
-        el.readOnly = true;
-    });
-
-    popup.querySelectorAll("select").forEach(el => {
-        el.disabled = true;
     });
 
     popup.querySelectorAll("button").forEach(btn => {
         if (btn.id !== "popup-close-btn") {
-            btn.style.display = "none"; // nasconde tutti i bottoni operativi
+            btn.style.display = "none";
         }
     });
 }
-
-// aggiungere alla fine di openPopup():
-// disablePopupInputs();
 /* ============================================================
-   VIEWER MODE — CARICAMENTO STATO SOLO LETTURA
+   VIEWER MODE — CARICA STATO DA GITHUB (SOLO LETTURA)
 ============================================================ */
 
-function loadState() {
-    const saved = localStorage.getItem("mapState_full");
-    const savedMap = localStorage.getItem("mapImage");
+async function loadStateFromGitHub() {
+    try {
+        const response = await fetch("state.json?cacheBust=" + Date.now());
+        const data = await response.json();
 
-    if (savedMap) {
-        document.getElementById("map-image").src = savedMap;
+        if (!data || !data.state) {
+            console.error("state.json non valido");
+            return;
+        }
+
+        renderMapFromState(data.state);
+        renderBoxesFromState(data.state.boxes || []);
+        updateSidebar();
+
+    } catch (err) {
+        console.error("Errore caricamento da GitHub:", err);
     }
+}
+/* ============================================================
+   VIEWER MODE — RENDER MAPPA DA state.json
+============================================================ */
 
-    if (!saved) return;
+function renderMapFromState(state) {
+    const mapImg = document.getElementById("map-image");
 
-    const state = JSON.parse(saved);
+    if (state.mapImage && mapImg) {
+        mapImg.src = state.mapImage;
+    }
+}
+/* ============================================================
+   VIEWER MODE — RENDER BOX DA state.json
+============================================================ */
+
+function renderBoxesFromState(boxes) {
     const container = document.getElementById("map-container");
+    container.innerHTML = ""; // pulisce tutto prima di ridisegnare
 
-    (state.boxes || []).forEach(data => {
+    boxes.forEach(data => {
         const box = document.createElement("div");
         box.className = "box";
+
+        // dataset
         box.dataset.id = data.id;
         box.dataset.type = data.type;
         box.dataset.name = data.name || "";
-        box.dataset.locked = data.locked || "false";
         box.dataset.standby = data.standby || "false";
         box.dataset.interventi = data.interventi || "";
         box.dataset.supporti = data.supporti || "";
@@ -95,14 +95,17 @@ function loadState() {
         box.dataset.sanInf = data.sanInf || "false";
         box.dataset.sanNome = data.sanNome || "";
 
-        box.dataset.ambulanze = data.ambulanze || "[]";
-        box.dataset.squadre = data.squadre || "[]";
+        // posizione
+        box.style.left = data.x;
+        box.style.top = data.y;
 
-        box.style.left = data.x || "200px";
-        box.style.top = data.y || "200px";
+        // popup in sola lettura
+        box.ondblclick = () => {
+            openPopup(box);
+            disablePopupInputs();
+        };
 
-        box.ondblclick = () => openPopup(box);
-
+        // header
         const header = document.createElement("div");
         header.className = "box-header";
 
@@ -117,9 +120,9 @@ function loadState() {
 
         title.innerText = `${EMOJI[data.type]} ${data.name || baseLabel}`;
         header.appendChild(title);
-
         box.appendChild(header);
 
+        // colori
         const ints = (data.interventi || "").split("|").filter(x => x);
         const sups = (data.supporti || "").split("|").filter(x => x);
 
@@ -129,12 +132,37 @@ function loadState() {
 
         container.appendChild(box);
     });
-
-    updateSidebar();
 }
 /* ============================================================
-   VIEWER MODE — SIDEBAR COMPLETA (SOLO LETTURA)
+   VIEWER MODE — AUTO REFRESH OGNI 15 SECONDI
 ============================================================ */
+
+setInterval(() => {
+    loadStateFromGitHub();
+}, 15000);
+
+// Carica subito al primo avvio
+loadStateFromGitHub();
+/* ============================================================
+   VIEWER MODE — SIDEBAR (SOLO LETTURA)
+============================================================ */
+
+function readBoxData(box) {
+    return {
+        id: box.dataset.id,
+        type: box.dataset.type,
+        name: box.dataset.name || "",
+        standby: box.dataset.standby === "true",
+        interventi: (box.dataset.interventi || "").split("|").filter(x => x),
+        supporti: (box.dataset.supporti || "").split("|").filter(x => x),
+        note: box.dataset.note || "",
+        membri: JSON.parse(box.dataset.membri || "[]"),
+        radio: box.dataset.radio || "",
+        sanMed: box.dataset.sanMed === "true",
+        sanInf: box.dataset.sanInf === "true",
+        sanNome: box.dataset.sanNome || ""
+    };
+}
 
 function updateSidebar() {
     const sidebar = document.getElementById("sidebar-content");
@@ -175,7 +203,10 @@ function updateSidebar() {
 
             const unitDiv = document.createElement("div");
             unitDiv.className = "sidebar-unit";
-            unitDiv.ondblclick = () => openPopup(box);
+            unitDiv.ondblclick = () => {
+                openPopup(box);
+                disablePopupInputs();
+            };
 
             if (data.standby) unitDiv.classList.add("yellow");
             else if (data.interventi.length) unitDiv.classList.add("red");
