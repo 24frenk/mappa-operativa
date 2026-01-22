@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T19:19:15.297Z",
+  "timestamp": "2026-01-22T19:19:17.513Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
@@ -14,8 +14,8 @@
         "supporti": "",
         "note": "wmc",
         "membri": "[{\"nome\":\"ANDREA ARRIGONI\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"3333333333\"}]",
-        "x": "200px",
-        "y": "200px",
+        "x": "535px",
+        "y": "609px",
         "radio": "99",
         "sanMed": "true",
         "sanInf": "false",
