@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-22T18:54:43.377Z",
+  "timestamp": "2026-01-22T18:55:16.499Z",
   "state": {
     "scale": 1,
     "mapLocked": false,
@@ -7,19 +7,19 @@
       {
         "id": "box_u5wxw73jy",
         "type": "ambulanza",
-        "name": "",
+        "name": "99",
         "locked": "false",
         "standby": "false",
         "interventi": "",
         "supporti": "",
-        "note": "",
-        "membri": "[]",
+        "note": "wmc",
+        "membri": "[{\"nome\":\"andrea arrigoni\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"3333333333\"}]",
         "x": "666px",
         "y": "561px",
-        "radio": "",
+        "radio": "99",
         "sanMed": "false",
-        "sanInf": "false",
-        "sanNome": ""
+        "sanInf": "true",
+        "sanNome": "sntn"
       }
     ]
   }
