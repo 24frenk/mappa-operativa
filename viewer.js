@@ -1,267 +1,232 @@
 /* ============================================================
-   CARICA STATO DA GITHUB
+   VIEWER MODE — DISABILITAZIONE FUNZIONI OPERATIVE
 ============================================================ */
 
-async function loadOnlineState() {
-    try {
-        const res = await fetch("state.json?cacheBust=" + Date.now());
-        const data = await res.json();
-
-        updateStatusBar(data.timestamp);
-        renderMap(data.state);
-        renderSidebar(data.state);
-
-    } catch (e) {
-        console.error("Errore caricamento stato:", e);
-    }
-}
-
-function updateStatusBar(ts) {
-    document.getElementById("last-update").textContent =
-        new Date(ts).toLocaleString("it-IT");
-
-    const diff = Date.now() - new Date(ts).getTime();
-    const minutes = diff / 60000;
-
-    document.getElementById("online-status").textContent =
-        minutes < 2 ? "ONLINE" : "OFFLINE";
-}
+function saveState() { return; }
+function syncToGitHub() { return; }
+function toggleStandby() { return; }
+function terminaIntervento() { return; }
+function terminaSupporto() { return; }
+function savePopup() { return; }
+function removeCurrentUnit() { return; }
 
 /* ============================================================
-   RENDER MAPPA
+   VIEWER MODE — DISABILITA DRAG
 ============================================================ */
 
-function renderMap(state) {
-    const cont = document.getElementById("boxes-container");
-    cont.innerHTML = "";
+function startDrag() {
+    return; // nessun trascinamento nel viewer
+}
+/* ============================================================
+   VIEWER MODE — DISABILITA TUTTI GLI INPUT NEI POPUP
+============================================================ */
 
-    state.boxes.forEach(b => {
-        const el = document.createElement("div");
-        el.className = "box";
-        el.style.left = b.x;
-        el.style.top = b.y;
+function disablePopupInputs() {
+    const popup = document.getElementById("popup");
 
-        const ints = (b.interventi || "").split("|").filter(x => x);
-        const sups = (b.supporti || "").split("|").filter(x => x);
+    popup.querySelectorAll("input").forEach(el => {
+        el.disabled = true;
+        el.readOnly = true;
+    });
 
-        if (b.standby === "true") el.classList.add("yellow");
-        else if (ints.length > 0) el.classList.add("red");
-        else if (sups.length > 0) el.classList.add("orange");
+    popup.querySelectorAll("textarea").forEach(el => {
+        el.disabled = true;
+        el.readOnly = true;
+    });
 
-        const baseLabel =
-            b.type === "postazione" ? "Postazione" :
-            b.type === "ambulanza" ? "Ambulanza" :
-            b.type === "squadra" ? "Squadra" :
-            "PMA";
+    popup.querySelectorAll("select").forEach(el => {
+        el.disabled = true;
+    });
 
-        const EMOJI = {
-            postazione: "📍",
-            ambulanza: "🚑",
-            squadra: "⛑️",
-            pma: "🏥"
-        };
-
-        el.innerHTML = `
-            <div class="box-header">
-                <div class="box-title">${EMOJI[b.type]} ${b.name || baseLabel}</div>
-            </div>
-        `;
-
-        el.ondblclick = () => openPopup(b);
-
-        cont.appendChild(el);
+    popup.querySelectorAll("button").forEach(btn => {
+        if (btn.id !== "popup-close-btn") {
+            btn.style.display = "none"; // nasconde tutti i bottoni operativi
+        }
     });
 }
 
+// aggiungere alla fine di openPopup():
+// disablePopupInputs();
 /* ============================================================
-   RENDER SIDEBAR
+   VIEWER MODE — CARICAMENTO STATO SOLO LETTURA
 ============================================================ */
 
-function renderSidebar(state) {
-    const cont = document.getElementById("sidebar-content");
-    cont.innerHTML = "";
+function loadState() {
+    const saved = localStorage.getItem("mapState_full");
+    const savedMap = localStorage.getItem("mapImage");
 
-    const cats = {
+    if (savedMap) {
+        document.getElementById("map-image").src = savedMap;
+    }
+
+    if (!saved) return;
+
+    const state = JSON.parse(saved);
+    const container = document.getElementById("map-container");
+
+    (state.boxes || []).forEach(data => {
+        const box = document.createElement("div");
+        box.className = "box";
+        box.dataset.id = data.id;
+        box.dataset.type = data.type;
+        box.dataset.name = data.name || "";
+        box.dataset.locked = data.locked || "false";
+        box.dataset.standby = data.standby || "false";
+        box.dataset.interventi = data.interventi || "";
+        box.dataset.supporti = data.supporti || "";
+        box.dataset.note = data.note || "";
+        box.dataset.membri = data.membri || "[]";
+        box.dataset.radio = data.radio || "";
+        box.dataset.sanMed = data.sanMed || "false";
+        box.dataset.sanInf = data.sanInf || "false";
+        box.dataset.sanNome = data.sanNome || "";
+
+        box.dataset.ambulanze = data.ambulanze || "[]";
+        box.dataset.squadre = data.squadre || "[]";
+
+        box.style.left = data.x || "200px";
+        box.style.top = data.y || "200px";
+
+        box.ondblclick = () => openPopup(box);
+
+        const header = document.createElement("div");
+        header.className = "box-header";
+
+        const title = document.createElement("div");
+        title.className = "box-title";
+
+        const baseLabel =
+            data.type === "postazione" ? "Postazione" :
+            data.type === "ambulanza" ? "Ambulanza" :
+            data.type === "squadra" ? "Squadra" :
+            "PMA";
+
+        title.innerText = `${EMOJI[data.type]} ${data.name || baseLabel}`;
+        header.appendChild(title);
+
+        box.appendChild(header);
+
+        const ints = (data.interventi || "").split("|").filter(x => x);
+        const sups = (data.supporti || "").split("|").filter(x => x);
+
+        if (data.standby === "true") box.classList.add("yellow");
+        else if (ints.length > 0) box.classList.add("red");
+        else if (sups.length > 0) box.classList.add("orange");
+
+        container.appendChild(box);
+    });
+
+    updateSidebar();
+}
+/* ============================================================
+   VIEWER MODE — SIDEBAR COMPLETA (SOLO LETTURA)
+============================================================ */
+
+function updateSidebar() {
+    const sidebar = document.getElementById("sidebar-content");
+    if (!sidebar) return;
+    sidebar.innerHTML = "";
+
+    const boxes = [...document.querySelectorAll(".box")];
+
+    const categories = {
         pma: [],
         postazione: [],
         ambulanza: [],
         squadra: []
     };
 
-    state.boxes.forEach(b => cats[b.type].push(b));
-
-    function addSection(label, arr) {
-        if (!arr.length) return;
-
-        const title = document.createElement("div");
-        title.className = "sidebar-category-title";
-        title.textContent = `${label} (${arr.length})`;
-        cont.appendChild(title);
-
-        const wrap = document.createElement("div");
-        wrap.className = "sidebar-category";
-
-        arr.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-
-        arr.forEach(b => {
-            const div = document.createElement("div");
-            div.className = "sidebar-unit";
-
-            const ints = (b.interventi || "").split("|").filter(x => x);
-            const sups = (b.supporti || "").split("|").filter(x => x);
-
-            if (b.standby === "true") div.classList.add("yellow");
-            else if (ints.length > 0) div.classList.add("red");
-            else if (sups.length > 0) div.classList.add("orange");
-
-            const EMOJI = {
-                postazione: "📍",
-                ambulanza: "🚑",
-                squadra: "⛑️",
-                pma: "🏥"
-            };
-
-            const baseLabel =
-                b.type === "postazione" ? "Postazione" :
-                b.type === "ambulanza" ? "Ambulanza" :
-                b.type === "squadra" ? "Squadra" :
-                "PMA";
-
-            div.innerHTML = `
-                <div class="sidebar-unit-title">${EMOJI[b.type]} ${b.name || baseLabel}</div>
-            `;
-
-            if (b.standby === "true")
-                div.innerHTML += `<div class="sidebar-unit-line"><b>Stato: In Standby</b></div>`;
-
-            if (ints.length)
-                div.innerHTML += `<div class="sidebar-unit-line"><b>Intervento:</b> ${ints.join(", ")}</div>`;
-
-            if (sups.length)
-                div.innerHTML += `<div class="sidebar-unit-line"><b>Supporto:</b> ${sups.join(", ")}</div>`;
-
-            if (b.radio)
-                div.innerHTML += `<div class="sidebar-unit-line">Radio: ${b.radio}</div>`;
-
-            if (b.sanMed === "true" || b.sanInf === "true") {
-                let s = "";
-                if (b.sanMed === "true") s += "Medico ";
-                if (b.sanInf === "true") s += "Infermiere ";
-                if (b.sanNome) s += `- ${b.sanNome}`;
-                div.innerHTML += `<div class="sidebar-unit-line">Sanitario: ${s}</div>`;
-            }
-
-            if (b.membri) {
-                try {
-                    const m = JSON.parse(b.membri);
-                    if (m.length) {
-                        const elenco = m.map(x => x.nome || "").join(", ");
-                        div.innerHTML += `<div class="sidebar-unit-line">Membri (${m.length}): ${elenco}</div>`;
-                    }
-                } catch {}
-            }
-
-            div.ondblclick = () => openPopup(b);
-
-            wrap.appendChild(div);
-        });
-
-        cont.appendChild(wrap);
-    }
-
-    addSection("PMA", cats.pma);
-    addSection("Postazioni", cats.postazione);
-    addSection("Ambulanze", cats.ambulanza);
-    addSection("Squadre", cats.squadra);
-}
-
-/* ============================================================
-   POPUP (IDENTICO ALLA VERSIONE OFFLINE, MA BLOCCATO)
-============================================================ */
-
-function openPopup(b) {
-    const popup = document.getElementById("popup");
-    const title = document.getElementById("popup-title");
-    const content = document.getElementById("popup-content");
-
-    const EMOJI = {
-        postazione: "📍",
-        ambulanza: "🚑",
-        squadra: "⛑️",
-        pma: "🏥"
-    };
-
-    const baseLabel =
-        b.type === "postazione" ? "Postazione" :
-        b.type === "ambulanza" ? "Ambulanza" :
-        b.type === "squadra" ? "Squadra" :
-        "PMA";
-
-    title.textContent = `${EMOJI[b.type]} ${b.name || baseLabel}`;
-
-    /* Popup identico alla tua versione offline */
-    content.innerHTML = buildPopupHTML(b);
-
-    /* Rende tutto in sola lettura */
-    content.querySelectorAll("input, textarea, select").forEach(el => {
-        el.readOnly = true;
-        el.disabled = true;
+    boxes.forEach(box => {
+        const type = box.dataset.type;
+        if (categories[type]) categories[type].push(box);
     });
 
-    popup.classList.remove("hidden");
-}
+    function createCategorySection(label, items) {
+        if (!items.length) return;
 
-document.getElementById("popup-close").onclick = () => {
-    document.getElementById("popup").classList.add("hidden");
-};
+        const titleEl = document.createElement("div");
+        titleEl.className = "sidebar-category-title";
+        titleEl.innerText = `${label} (${items.length})`;
+        sidebar.appendChild(titleEl);
 
-/* ============================================================
-   COSTRUZIONE HTML POPUP (COPIA DELLA TUA VERSIONE)
-============================================================ */
+        const container = document.createElement("div");
+        container.className = "sidebar-category";
 
-function buildPopupHTML(b) {
-    let html = "";
+        items.sort((a, b) =>
+            (a.dataset.name || "").localeCompare(b.dataset.name || "")
+        );
 
-    function row(label, value) {
-        return `<div class="popup-section"><b>${label}:</b> ${value || "-"}</div>`;
-    }
+        items.forEach(box => {
+            const data = readBoxData(box);
 
-    html += row("Nome", b.name);
-    html += row("Tipo", b.type);
-    html += row("Radio", b.radio);
+            const unitDiv = document.createElement("div");
+            unitDiv.className = "sidebar-unit";
+            unitDiv.ondblclick = () => openPopup(box);
 
-    if (b.sanMed === "true" || b.sanInf === "true") {
-        let s = "";
-        if (b.sanMed === "true") s += "Medico ";
-        if (b.sanInf === "true") s += "Infermiere ";
-        if (b.sanNome) s += `- ${b.sanNome}`;
-        html += row("Sanitario", s);
-    }
+            if (data.standby) unitDiv.classList.add("yellow");
+            else if (data.interventi.length) unitDiv.classList.add("red");
+            else if (data.supporti.length) unitDiv.classList.add("orange");
 
-    const ints = (b.interventi || "").split("|").filter(x => x);
-    if (ints.length) html += row("Intervento", ints.join(", "));
+            const title = document.createElement("div");
+            title.className = "sidebar-unit-title";
 
-    const sups = (b.supporti || "").split("|").filter(x => x);
-    if (sups.length) html += row("Supporto", sups.join(", "));
+            const baseLabel =
+                data.type === "postazione" ? "Postazione" :
+                data.type === "ambulanza" ? "Ambulanza" :
+                data.type === "squadra" ? "Squadra" :
+                "PMA";
 
-    if (b.note) html += row("Note", b.note);
+            title.innerText = `${EMOJI[data.type]} ${data.name || baseLabel}`;
+            unitDiv.appendChild(title);
 
-    if (b.membri) {
-        try {
-            const m = JSON.parse(b.membri);
-            if (m.length) {
-                const elenco = m.map(x => x.nome || "").join(", ");
-                html += row("Membri", elenco);
+            if (data.interventi.length) {
+                const line = document.createElement("div");
+                line.className = "sidebar-unit-line";
+                line.innerHTML = `<b>Intervento:</b> ${data.interventi.join(", ")}`;
+                unitDiv.appendChild(line);
             }
-        } catch {}
+
+            if (data.supporti.length) {
+                const line = document.createElement("div");
+                line.className = "sidebar-unit-line";
+                line.innerHTML = `<b>Supporto:</b> ${data.supporti.join(", ")}`;
+                unitDiv.appendChild(line);
+            }
+
+            if (data.radio) {
+                const line = document.createElement("div");
+                line.className = "sidebar-unit-line";
+                line.innerText = `Radio: ${data.radio}`;
+                unitDiv.appendChild(line);
+            }
+
+            if (data.membri.length) {
+                const line = document.createElement("div");
+                line.className = "sidebar-unit-line";
+                const elenco = data.membri.map(m => {
+                    const nome = m.nome || "";
+                    const ruoli = m.ruoli?.length ? ` (${m.ruoli.join(", ")})` : "";
+                    return `${nome}${ruoli}`;
+                });
+                line.innerText = `Membri (${data.membri.length}): ${elenco.join(", ")}`;
+                unitDiv.appendChild(line);
+            }
+
+            if (data.note) {
+                const line = document.createElement("div");
+                line.className = "sidebar-unit-line";
+                line.innerText = `Note: ${data.note}`;
+                unitDiv.appendChild(line);
+            }
+
+            container.appendChild(unitDiv);
+        });
+
+        sidebar.appendChild(container);
     }
 
-    return html;
+    createCategorySection("PMA", categories.pma);
+    createCategorySection("Postazioni", categories.postazione);
+    createCategorySection("Ambulanze", categories.ambulanza);
+    createCategorySection("Squadre", categories.squadra);
 }
-
-/* ============================================================
-   AVVIO
-============================================================ */
-
-loadOnlineState();
-setInterval(loadOnlineState, 15000);
