@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-23T14:13:57.755Z",
+  "timestamp": "2026-01-23T14:13:59.640Z",
   "state": {
     "scale": 0.5,
     "mapLocked": false,
@@ -7,6 +7,40 @@
       {
         "id": "box_xvegxfgrt",
         "type": "squadra",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_iy6l2irfj",
+        "type": "pma",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      },
+      {
+        "id": "box_xkssk7xwa",
+        "type": "ambulanza",
         "name": "",
         "locked": "false",
         "standby": "false",
