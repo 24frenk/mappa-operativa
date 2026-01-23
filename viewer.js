@@ -54,7 +54,8 @@ function rebuildMap(stato) {
     const map = document.getElementById("map-container");
     map.innerHTML = "";
 
-    document.getElementById("map-image").src = localStorage.getItem("mapImage") || "";
+    document.getElementById("map-image").src = "mappa.jpg";
+
 
     stato.boxes.forEach(b => {
         const box = createBox(b);
