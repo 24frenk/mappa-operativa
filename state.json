@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-23T14:14:16.350Z",
+  "timestamp": "2026-01-23T14:14:21.346Z",
   "state": {
     "scale": 0.5,
     "mapLocked": false,
@@ -67,8 +67,8 @@
         "membri": "[]",
         "ambulanze": "[]",
         "squadre": "[]",
-        "x": "510px",
-        "y": "423px",
+        "x": "109px",
+        "y": "556px",
         "radio": "",
         "sanMed": "false",
         "sanInf": "false",
