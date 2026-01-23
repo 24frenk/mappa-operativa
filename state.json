@@ -1,8 +1,26 @@
 {
-  "timestamp": "2026-01-23T14:13:55.075Z",
+  "timestamp": "2026-01-23T14:13:57.755Z",
   "state": {
-    "scale": 0.53,
+    "scale": 0.5,
     "mapLocked": false,
-    "boxes": []
+    "boxes": [
+      {
+        "id": "box_xvegxfgrt",
+        "type": "squadra",
+        "name": "",
+        "locked": "false",
+        "standby": "false",
+        "interventi": "",
+        "supporti": "",
+        "note": "",
+        "membri": "[]",
+        "x": "200px",
+        "y": "200px",
+        "radio": "",
+        "sanMed": "false",
+        "sanInf": "false",
+        "sanNome": ""
+      }
+    ]
   }
 }
