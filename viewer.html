@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mappa Operativa – Viewer</title>
+    <link rel="stylesheet" href="viewer.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div id="sidebar-content"></div>
+    </div>
+
+    <!-- Mappa -->
+    <div id="map-container-wrapper">
+        <div id="map-container">
+            <img id="map-image" src="" alt="Mappa">
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div id="popup-title"></div>
+            <div id="popup-content"></div>
+            <button onclick="closePopup()">Chiudi</button>
+        </div>
+    </div>
+
+    <!-- Firebase + Viewer -->
+    <script type="module" src="viewer.js"></script>
+
+</body>
+</html>
