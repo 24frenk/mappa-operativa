@@ -8,28 +8,43 @@
 
 <body>
 
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div id="sidebar-content"></div>
+    <!-- TOP BAR -->
+    <div id="top-bar">
+        <div>Mappa Operativa – Viewer</div>
     </div>
 
-    <!-- Mappa -->
-    <div id="map-container-wrapper">
-        <div id="map-container">
-            <img id="map-image" src="" alt="Mappa">
+    <!-- LAYOUT PRINCIPALE -->
+    <div id="main">
+
+        <!-- SIDEBAR -->
+        <div id="sidebar">
+            <div id="sidebar-content"></div>
         </div>
+
+        <!-- MAPPA -->
+        <div id="map-wrapper">
+            <div id="map-container">
+                <img id="map-image" src="mappa.jpg" alt="Mappa">
+            </div>
+        </div>
+
     </div>
 
-    <!-- Popup -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <div id="popup-title"></div>
+    <!-- POPUP -->
+    <div id="popup">
+        <div id="popup-inner">
+
+            <div id="popup-header">
+                <h2 id="popup-title"></h2>
+                <button id="popup-close" onclick="closePopup()">Chiudi</button>
+            </div>
+
             <div id="popup-content"></div>
-            <button onclick="closePopup()">Chiudi</button>
+
         </div>
     </div>
 
-    <!-- Firebase + Viewer -->
+    <!-- SCRIPT -->
     <script type="module" src="viewer.js"></script>
 
 </body>
