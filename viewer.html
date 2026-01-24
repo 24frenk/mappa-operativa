@@ -101,19 +101,25 @@ window.addEventListener("DOMContentLoaded", () => {
         return box;
     }
 
-    function rebuildMap(stato) {
-        const map = document.getElementById("map-container");
-        map.innerHTML = "";
+   function rebuildMap(stato) {
+    const map = document.getElementById("map-container");
 
-        document.getElementById("map-image").src = "mappa.jpg";
+    // NON cancelliamo la mappa
+    const mapImage = document.getElementById("map-image");
+    mapImage.src = "mappa.jpg";
 
-        stato.boxes.forEach(b => {
-            const box = createBox(b);
-            map.appendChild(box);
-        });
+    // Cancella solo le box
+    document.querySelectorAll(".box").forEach(b => b.remove());
 
-        updateSidebar();
-    }
+    // Ricrea le box
+    stato.boxes.forEach(b => {
+        const box = createBox(b);
+        map.appendChild(box);
+    });
+
+    updateSidebar();
+}
+
 
     function updateSidebar() {
         const sidebar = document.getElementById("sidebar-content");
