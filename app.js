@@ -29,6 +29,8 @@ async function loadOnlineData() {
         if (!res.ok) throw new Error("Impossibile caricare data.json");
 
         const data = await res.json();
+       document.getElementById("map-image").src = "mappa.jpg";
+
         renderMap(data);
     } catch (err) {
         alert("Errore nel caricamento dei dati online.");
