@@ -64,7 +64,7 @@
       "type": "squadra",
       "name": "PAPA 1",
       "locked": "false",
-      "standby": "true",
+      "standby": "false",
       "interventi": "",
       "supporti": "",
       "note": "ZAINO A + DAE",
