@@ -311,3 +311,20 @@ body {
     margin-bottom: 6px;
 }
 
+#map-container {
+    position: relative;
+}
+
+#map-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+}
+
+.box {
+    position: absolute;
+    z-index: 10;
+}
