@@ -27,7 +27,7 @@
       "name": "TEST",
       "locked": "false",
       "standby": "false",
-      "interventi": "VALUTAZIONE TRASPORTO",
+      "interventi": "",
       "supporti": "ABZ",
       "note": "TEST",
       "membri": "[{\"nome\":\"TESTT\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"TEST\"}]",
