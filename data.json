@@ -62,21 +62,21 @@
     {
       "id": "box_162rz70pl",
       "type": "squadra",
-      "name": "PROVA",
+      "name": "PAPA 1",
       "locked": "false",
       "standby": "true",
       "interventi": "",
-      "supporti": "PAPA",
-      "note": "PROVA",
+      "supporti": "",
+      "note": "ZAINO A + DAE",
       "membri": "[{\"nome\":\"FALLA LUIGI\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"2222222222\"}]",
       "ambulanze": "[]",
       "squadre": "[]",
       "x": "516px",
       "y": "576px",
-      "radio": "PROVA",
+      "radio": "01",
       "sanMed": "true",
       "sanInf": "false",
-      "sanNome": "PROVA"
+      "sanNome": "FALLA"
     },
     {
       "id": "box_sby7037ui",
