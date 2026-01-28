@@ -46,8 +46,14 @@ function renderMap(state) {
     const container = document.getElementById("map-container");
     container.innerHTML = "";
 
+    // reinseriamo l'immagine della mappa
+    const img = document.createElement("img");
+    img.id = "map-image";
+    img.src = "mappa.jpg";
+    container.appendChild(img);
+
     scale = state.scale || 1;
-    document.getElementById("map-container").style.transform = `scale(${scale})`;
+    container.style.transform = `scale(${scale})`;
 
     (state.boxes || []).forEach(data => {
         const box = document.createElement("div");
