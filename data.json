@@ -1,5 +1,5 @@
 {
-  "scale": 0.58,
+  "scale": 0.49,
   "mapLocked": false,
   "boxes": [
     {
@@ -31,6 +31,8 @@
       "supporti": "ABZ",
       "note": "TEST",
       "membri": "[{\"nome\":\"TESTT\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"TEST\"}]",
+      "ambulanze": "[]",
+      "squadre": "[]",
       "x": "964px",
       "y": "577px",
       "radio": "TEST",
@@ -48,6 +50,8 @@
       "supporti": "",
       "note": "",
       "membri": "[]",
+      "ambulanze": "[]",
+      "squadre": "[]",
       "x": "282px",
       "y": "331px",
       "radio": "",
@@ -65,12 +69,31 @@
       "supporti": "PAPA",
       "note": "PROVA",
       "membri": "[{\"nome\":\"PROVA\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"PROVA\"}]",
+      "ambulanze": "[]",
+      "squadre": "[]",
       "x": "516px",
       "y": "576px",
       "radio": "PROVA",
       "sanMed": "true",
       "sanInf": "false",
       "sanNome": "PROVA"
+    },
+    {
+      "id": "box_sby7037ui",
+      "type": "pma",
+      "name": "TEST SYNC",
+      "locked": "false",
+      "standby": "false",
+      "interventi": "",
+      "supporti": "",
+      "note": "",
+      "membri": "[]",
+      "x": "765px",
+      "y": "420px",
+      "radio": "",
+      "sanMed": "false",
+      "sanInf": "false",
+      "sanNome": ""
     }
   ]
 }
