@@ -24,21 +24,21 @@
     {
       "id": "box_2rbnszxnk",
       "type": "ambulanza",
-      "name": "TEST",
+      "name": "738",
       "locked": "false",
       "standby": "false",
       "interventi": "",
       "supporti": "",
-      "note": "TEST",
-      "membri": "[{\"nome\":\"TESTT\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"TEST\"}]",
+      "note": "",
+      "membri": "[{\"nome\":\"MATOZZA FRANCESCO\",\"ruoli\":[\"Team Leader\"],\"telefono\":\"2222222222\"}]",
       "ambulanze": "[]",
       "squadre": "[]",
       "x": "964px",
       "y": "577px",
-      "radio": "TEST",
+      "radio": "02",
       "sanMed": "false",
       "sanInf": "true",
-      "sanNome": "TEST"
+      "sanNome": "INTERRANTE"
     },
     {
       "id": "box_4j9smoxe3",
