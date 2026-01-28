@@ -29,6 +29,8 @@ async function loadOnlineData() {
         if (!res.ok) throw new Error("Impossibile caricare data.json");
 
         const data = await res.json();
+       console.log("DATA ONLINE:", data);
+
        document.getElementById("map-image").src = "mappa.jpg";
 
         renderMap(data);
