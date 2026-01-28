@@ -94,25 +94,6 @@
       "sanMed": "false",
       "sanInf": "false",
       "sanNome": ""
-    },
-    {
-      "id": "box_l9qgo4505",
-      "type": "postazione",
-      "name": "",
-      "locked": "false",
-      "standby": "false",
-      "interventi": "",
-      "supporti": "",
-      "note": "",
-      "membri": "[]",
-      "ambulanze": "[]",
-      "squadre": "[]",
-      "x": "906px",
-      "y": "310px",
-      "radio": "",
-      "sanMed": "false",
-      "sanInf": "false",
-      "sanNome": ""
     }
   ]
 }
