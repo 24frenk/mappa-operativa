@@ -328,3 +328,33 @@ body {
     position: absolute;
     z-index: 10;
 }
+
+#map-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+#map-container {
+    position: relative;
+    z-index: 1;
+}
+
+#map-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.box {
+    position: absolute;
+    z-index: 10;
+}
+
+#sidebar {
+    position: relative;
+    z-index: 9999;
+}
+
