@@ -323,3 +323,25 @@ body {
     font-weight: bold;
     margin-bottom: 6px;
 }
+
+/* ============================================================
+   FIX POPUP ONLINE — SFONDO BIANCO PER TUTTE LE SEZIONI
+============================================================ */
+
+.popup {
+    background: white !important;
+}
+
+.popup-section {
+    background: white !important;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.popup-readonly,
+.popup-readonly-list {
+    background: white !important;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
