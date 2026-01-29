@@ -325,23 +325,57 @@ body {
 }
 
 /* ============================================================
-   FIX POPUP ONLINE — SFONDO BIANCO PER TUTTE LE SEZIONI
+   FIX POPUP ONLINE — VERSIONE DEFINITIVA
 ============================================================ */
 
-.popup {
-    background: white !important;
+/* Sfondo scuro dietro il popup */
+#popup {
+    background: rgba(0,0,0,0.35) !important;
 }
 
+/* Contenitore bianco del popup (equivalente di #popup-inner offline) */
+#popup-content {
+    width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff !important;
+    color: #000000;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 12px rgba(0,0,0,0.25);
+    margin: 40px auto;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* Header del popup */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Sezioni interne del popup */
 .popup-section {
-    background: white !important;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 12px;
+    background: #ffffff !important;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
 }
 
+/* Titolo sezione */
+.popup-section-title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+/* Blocchi di testo in sola lettura */
 .popup-readonly,
 .popup-readonly-list {
-    background: white !important;
+    background: #ffffff !important;
     padding: 6px 8px;
     border-radius: 4px;
 }
