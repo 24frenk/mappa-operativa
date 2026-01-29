@@ -1,7 +1,6 @@
 /* ============================================================
    VERSIONE ONLINE — SOLA LETTURA
-   Nessuna modifica, nessun drag, nessun salvataggio.
-   Carica tutto da data.json e mostra sidebar + popup.
+   Carica data.json, mostra sidebar + popup, stato operativo.
 ============================================================ */
 
 const IS_ONLINE_VERSION = true;
@@ -18,6 +17,45 @@ const EMOJI = {
 };
 
 /* ============================================================
+   STATO OPERATIVO ONLINE
+============================================================ */
+
+let onlineStatus = {
+    reachable: false,
+    lastSync: null
+};
+
+function updateOnlineStatusUI() {
+    const statusDiv = document.getElementById("sidebar-status");
+    if (!statusDiv) return;
+
+    const dotClass = onlineStatus.reachable ? "status-online" : "status-offline";
+    const text = onlineStatus.reachable ? "Online" : "Offline";
+
+    const last = onlineStatus.lastSync
+        ? new Date(onlineStatus.lastSync).toLocaleString()
+        : "—";
+
+    statusDiv.innerHTML = `
+        <div><span class="status-dot ${dotClass}"></span>${text}</div>
+        <div class="sync-time">Ultima sync: ${last}</div>
+    `;
+}
+
+/* ============================================================
+   CHECK REACHABILITY GITHUB (solo HEAD)
+============================================================ */
+
+async function checkGitHubReachability() {
+    try {
+        const res = await fetch("data.json?check=" + Date.now(), { method: "HEAD" });
+        onlineStatus.reachable = res.ok;
+    } catch {
+        onlineStatus.reachable = false;
+    }
+    updateOnlineStatusUI();
+}
+/* ============================================================
    CARICAMENTO DATA.JSON
 ============================================================ */
 
@@ -25,7 +63,12 @@ async function loadOnlineData() {
     try {
         const res = await fetch("data.json?cache=" + Date.now());
         const data = await res.json();
+
+        onlineStatus.lastSync = data.lastSync || null;
+        updateOnlineStatusUI();
+
         buildMapFromJSON(data);
+
     } catch (err) {
         console.error("Errore caricamento data.json", err);
     }
@@ -37,22 +80,20 @@ async function loadOnlineData() {
 
 function buildMapFromJSON(state) {
     const container = document.getElementById("map-container");
-    container.innerHTML = ""; // pulizia
+    container.innerHTML = "";
 
-    // Mappa fissa (mappa.jpg)
     const img = document.createElement("img");
     img.id = "map-image";
     img.src = "mappa.jpg";
     container.appendChild(img);
 
-    // Scala (solo visualizzazione)
     const scale = state.scale || 1;
     container.style.transform = `scale(${scale})`;
 
-    // Creazione box
     (state.boxes || []).forEach(data => {
         const box = document.createElement("div");
         box.className = "box";
+
         box.dataset.id = data.id;
         box.dataset.type = data.type;
         box.dataset.name = data.name || "";
@@ -71,7 +112,6 @@ function buildMapFromJSON(state) {
         box.style.left = data.x || "200px";
         box.style.top = data.y || "200px";
 
-        // Header
         const header = document.createElement("div");
         header.className = "box-header";
 
@@ -87,10 +127,8 @@ function buildMapFromJSON(state) {
         title.innerText = `${EMOJI[data.type]} ${data.name || baseLabel}`;
         header.appendChild(title);
 
-        // Nessun pulsante X online
         box.appendChild(header);
 
-        // Colore stato
         const ints = (data.interventi || "").split("|").filter(x => x);
         const sups = (data.supporti || "").split("|").filter(x => x);
 
@@ -98,7 +136,6 @@ function buildMapFromJSON(state) {
         else if (ints.length > 0) box.classList.add("red");
         else if (sups.length > 0) box.classList.add("orange");
 
-        // Apertura popup (sola lettura)
         box.ondblclick = () => openPopup(box);
 
         container.appendChild(box);
@@ -112,10 +149,10 @@ function buildMapFromJSON(state) {
 
 function readBoxData(box) {
     let membri = [];
-    try { membri = JSON.parse(box.dataset.membri || "[]"); } catch {}
-
     let ambulanze = [];
     let squadre = [];
+
+    try { membri = JSON.parse(box.dataset.membri || "[]"); } catch {}
     try { ambulanze = JSON.parse(box.dataset.ambulanze || "[]"); } catch {}
     try { squadre = JSON.parse(box.dataset.squadre || "[]"); } catch {}
 
@@ -170,7 +207,6 @@ function buildPopupContent_ReadOnly(data) {
     else if (data.type === "ambulanza" || data.type === "squadra") buildPopupAmbSqu_ReadOnly(content, data);
     else if (data.type === "pma") buildPopupPMA_ReadOnly(content, data);
 }
-
 /* ============================================================
    POPUP POSTAZIONE — READ ONLY
 ============================================================ */
@@ -197,7 +233,6 @@ function buildPopupPostazione_ReadOnly(content, data) {
     const row = document.createElement("div");
     row.className = "popup-row";
 
-    /* --- AMBULANZE PRESENTI --- */
     const colAmb = document.createElement("div");
     colAmb.className = "popup-row-column";
     colAmb.innerHTML = `<label>Ambulanze</label>`;
@@ -221,7 +256,6 @@ function buildPopupPostazione_ReadOnly(content, data) {
     colAmb.appendChild(listAmb);
     row.appendChild(colAmb);
 
-    /* --- SQUADRE PRESENTI --- */
     const colSqu = document.createElement("div");
     colSqu.className = "popup-row-column";
     colSqu.innerHTML = `<label>Squadre</label>`;
@@ -248,12 +282,12 @@ function buildPopupPostazione_ReadOnly(content, data) {
     secPres.appendChild(row);
     content.appendChild(secPres);
 }
+
 /* ============================================================
    POPUP AMBULANZA / SQUADRA — READ ONLY
 ============================================================ */
 
 function buildPopupAmbSqu_ReadOnly(content, data) {
-    /* --- GENERALE --- */
     const secGen = document.createElement("div");
     secGen.className = "popup-section";
 
@@ -268,7 +302,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
     `;
     content.appendChild(secGen);
 
-    /* --- RADIO --- */
     const secRadio = document.createElement("div");
     secRadio.className = "popup-section";
     secRadio.innerHTML = `
@@ -277,7 +310,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
     `;
     content.appendChild(secRadio);
 
-    /* --- SANITARIO --- */
     const secSan = document.createElement("div");
     secSan.className = "popup-section";
 
@@ -294,7 +326,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
     `;
     content.appendChild(secSan);
 
-    /* --- NOTE --- */
     const secNote = document.createElement("div");
     secNote.className = "popup-section";
     secNote.innerHTML = `
@@ -303,7 +334,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
     `;
     content.appendChild(secNote);
 
-    /* --- MEMBRI --- */
     const secMembri = document.createElement("div");
     secMembri.className = "popup-section";
     secMembri.innerHTML = `<div class="popup-section-title">Membri / equipaggio</div>`;
@@ -356,7 +386,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
 
     content.appendChild(secMembri);
 
-    /* --- INTERVENTO --- */
     const secInt = document.createElement("div");
     secInt.className = "popup-section";
     secInt.innerHTML = `
@@ -367,7 +396,6 @@ function buildPopupAmbSqu_ReadOnly(content, data) {
     `;
     content.appendChild(secInt);
 
-    /* --- SUPPORTO --- */
     const secSup = document.createElement("div");
     secSup.className = "popup-section";
     secSup.innerHTML = `
@@ -471,7 +499,6 @@ function updateSidebar() {
 
             title.innerText = `${EMOJI[data.type]} ${data.name || baseLabel}`;
             unitDiv.appendChild(title);
-
             if ((data.type === "ambulanza" || data.type === "squadra") && data.standby) {
                 const line = document.createElement("div");
                 line.className = "sidebar-unit-line";
@@ -536,7 +563,6 @@ function updateSidebar() {
             }
 
             if (data.type === "postazione") {
-
                 if (data.ambulanze.length > 0) {
                     const ambTitle = document.createElement("div");
                     ambTitle.className = "sidebar-unit-line";
@@ -585,13 +611,6 @@ function updateSidebar() {
     createCategorySection("Ambulanze", categories.ambulanza);
     createCategorySection("Squadre", categories.squadra);
 }
-/* ============================================================
-   UTILITÀ
-============================================================ */
-
-function getBoxId(box) {
-    return box.dataset.id;
-}
 
 /* ============================================================
    CHIUSURA POPUP
@@ -605,6 +624,8 @@ function closePopup() {
    AVVIO VERSIONE ONLINE
 ============================================================ */
 
-window.onload = () => {
-    loadOnlineData();
+window.onload = async () => {
+    await loadOnlineData();
+    await checkGitHubReachability();
+    setInterval(checkGitHubReachability, 15000);
 };
