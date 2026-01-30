@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mappa Operativa – Online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body data-mode="online">
+    <!-- TOPBAR ONLINE (minimal) -->
+    <div id="top-bar">
+        <div id="topbar-left">
+            <div id="sync-status">
+                <span class="sync-dot sync-green" id="sync-dot"></span>
+                <span id="sync-text">Ultimo aggiornamento: --:--:--</span>
+            </div>
+        </div>
+
+        <div id="topbar-center"></div>
+
+        <div id="topbar-right"></div>
+    </div>
+
+    <!-- LAYOUT PRINCIPALE -->
+    <div id="main-layout">
+        <!-- SIDEBAR -->
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <div id="sidebar-title">Panoramica unità</div>
+            </div>
+            <div id="sidebar-content">
+                <!-- Riempita da JS -->
+            </div>
+        </div>
+
+        <!-- AREA MAPPA -->
+        <div id="map-wrapper">
+            <div id="map-container">
+                <!-- mappa + box generati da JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP UNIFICATO (read-only) -->
+    <div id="popup" style="display:none;">
+        <div id="popup-inner">
+            <div class="popup-header">
+                <div id="popup-title"></div>
+                <button id="popup-close" class="popup-close-btn">✖</button>
+            </div>
+
+            <div id="popup-content">
+                <!-- contenuto dinamico -->
+            </div>
+
+            <!-- FOOTER NASCOSTO ONLINE -->
+            <div id="popup-footer" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const IS_ONLINE_VERSION = true;
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
