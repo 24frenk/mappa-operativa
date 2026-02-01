@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mappa Operativa — Visualizzazione</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     TOP BAR — SOLO INFO, NESSUN CONTROLLO
+============================================================ -->
+<div id="top-bar">
+
+    <div id="sync-info" style="font-size:12px;">
+        <span id="sync-state">Stato: —</span> |
+        <span id="sync-last">Ultimo aggiornamento: —</span>
+    </div>
+
+    <div class="top-left">
+        <strong>Modalità Visualizzazione</strong>
+    </div>
+
+    <div class="top-right">
+        <span>Mappa bloccata</span>
+    </div>
+
+</div>
+
+<!-- ============================================================
+     LAYOUT PRINCIPALE
+============================================================ -->
+<div id="main">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div id="sidebar-content"></div>
+    </div>
+
+    <!-- MAPPA -->
+    <div id="map-wrapper">
+        <div id="map-container">
+            <img id="map-image" alt="Mappa">
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================================
+     POPUP (DISATTIVATO ONLINE, MA TENUTO PER COMPATIBILITÀ CSS)
+============================================================ -->
+<div id="popup" style="display:none;">
+    <div id="popup-inner">
+        <div id="popup-header">
+            <h2 id="popup-title"></h2>
+            <button id="popup-close" onclick="closePopup()">×</button>
+        </div>
+
+        <div id="popup-content"></div>
+
+        <div id="popup-footer">
+            <div class="popup-footer-left"></div>
+            <div class="popup-footer-center"></div>
+            <div class="popup-footer-right">
+                <button onclick="closePopup()">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     JS ONLINE (SOLO VISUALIZZAZIONE)
+============================================================ -->
+<script src="app.js"></script>
+
+<!-- STATUS SYNC -->
+<div id="sync-status" style="
+    position: fixed;
+    bottom: 5px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: none;
+    z-index: 9999;
+"></div>
+
+</body>
+</html>
