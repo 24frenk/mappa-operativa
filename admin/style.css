@@ -105,19 +105,23 @@ body {
     border-radius: 4px;
 }
 
+/* 🔵 PALETTE DEFINITIVA — SIDEBAR (TESTO NERO) */
 .sidebar-unit.red {
-    border-color: #b30000;
-    background: #ffe5e5;
+    border-color: #b00000;
+    background: #ff4c4c;
+    color: #000;
 }
 
 .sidebar-unit.orange {
-    border-color: #b35a00;
-    background: #ffe9d6;
+    border-color: #e65100;
+    background: #ff9800;
+    color: #000;
 }
 
 .sidebar-unit.yellow {
-    border-color: #b3a000;
-    background: #fff7cc;
+    border-color: #f9a825;
+    background: #ffeb3b;
+    color: #000;
 }
 
 .sidebar-unit-title {
@@ -171,25 +175,30 @@ body {
     line-height: 1.1;
     border-radius: 6px;
     border: 1px solid #000;
-    background: rgba(255,255,255,0.96);
+    background: #ffffff;
     cursor: move;
     touch-action: none;
     user-select: none;
+    color: #000 !important; /* TESTO NERO PER TUTTE */
 }
 
+/* 🔴 PALETTE DEFINITIVA — BOX SULLA MAPPA (NO TRASPARENZA, TESTO NERO) */
 .box.red {
-    border-color: #b30000;
-    background: #ffe5e5;
+    border-color: #b00000;
+    background: #ff4c4c !important;
+    color: #000 !important;
 }
 
 .box.orange {
-    border-color: #b35a00;
-    background: #ffe9d6;
+    border-color: #e65100;
+    background: #ff9800 !important;
+    color: #000 !important;
 }
 
 .box.yellow {
-    border-color: #b3a000;
-    background: #fff7cc;
+    border-color: #f9a825;
+    background: #ffeb3b !important;
+    color: #000 !important;
 }
 
 /* Header box */
